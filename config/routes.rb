@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
-  get 'grannies/index'
-  get 'grannies/show'
-  get 'grannies/new'
-  get 'grannies/create'
+  # get 'dashboard/bookings'
+  # get 'dashboard/listings'
+  # get 'reservations/new'
+  # get 'reservations/create'
   devise_for :users
+
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :reservations, only: [] do
+    member do
+      patch :confirm
+      patch :cancel
+    end
+  end
 
+  get "dashboard/bookings", to: "dashboard#bookings"
+  get "dashboard/listings", to: "dashboard#listings"
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
