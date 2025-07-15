@@ -1,5 +1,7 @@
 # app/controllers/reservations_controller.rb
 class ReservationsController < ApplicationController
+  before_action :authorize_owner!, only: [:confirm, :cancel]
+
   def new
     @granny = Granny.find(params[:granny_id])
     @reservation = Reservation.new
@@ -43,5 +45,11 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(:start_date, :end_date)
+  end
+
+  def authorize_owner!
+  @reservation = Reservation.find(params[:id])
+  unless @reservation.granny.user == current_user
+    redirect_to root_path, alert: "You are not authorized to perform this action."
   end
 end

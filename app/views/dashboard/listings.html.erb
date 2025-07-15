@@ -1,25 +1,26 @@
-<h2>Grannies You Own</h2>
+<h2 class="mb-4">Grannies You Own</h2>
 
 <% @grannies.each do |granny| %>
-  <h4><%= granny.name %></h4>
-  <% granny.reservations.each do |res| %>
-    <div class="card p-2 mb-2">
-      <strong>Booked by:</strong> <%= res.user.full_name %><br>
-      <strong>From:</strong> <%= res.start_date %> — <strong>To:</strong> <%= res.end_date %><br>
-      <strong>Status:</strong> <%= res.status.capitalize %>
-    </div>
-  <% end %>
-<% end %>
+  <div class="mb-5">
+    <h4><%= granny.name %></h4>
 
-<% granny.reservations.each do |res| %>
-  <div class="card p-2 mb-2">
-    <strong>Booked by:</strong> <%= res.user.full_name %><br>
-    <strong>From:</strong> <%= res.start_date %> — <strong>To:</strong> <%= res.end_date %><br>
-    <strong>Status:</strong> <%= res.status.capitalize %><br>
+    <% if granny.reservations.any? %>
+      <% granny.reservations.each do |res| %>
+        <div class="card p-3 mb-3">
+          <p><strong>Booked by:</strong> <%= res.user.full_name %></p>
+          <p><strong>From:</strong> <%= res.start_date %> — <strong>To:</strong> <%= res.end_date %></p>
+          <p><strong>Status:</strong> <%= res.status.capitalize %></p>
 
-    <% if res.pending? %>
-      <%= button_to "Accept", confirm_reservation_path(reservation), method: :patch, class: "btn btn-success" %>
-      <%= button_to "Reject", cancel_reservation_path(reservation), method: :patch, class: "btn btn-danger" %>
+          <% if res.pending? %>
+            <div class="d-flex gap-2 mt-2">
+              <%= button_to "Accept", confirm_reservation_path(res), method: :patch, class: "btn btn-success btn-sm" %>
+              <%= button_to "Reject", cancel_reservation_path(res), method: :patch, class: "btn btn-danger btn-sm" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-muted">No reservations for this granny yet.</p>
     <% end %>
   </div>
 <% end %>
