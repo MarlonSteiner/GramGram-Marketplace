@@ -2,8 +2,8 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :granny
 
-  validates :start_date, :end_date, :status, presence: true
-  validate :end_date_after_start_date
+  # validates :start_date, :end_date, :status, presence: true
+  # validate :end_date_after_start_date
 
   enum status: { pending: "pending", confirmed: "confirmed", cancelled: "cancelled" }
 
