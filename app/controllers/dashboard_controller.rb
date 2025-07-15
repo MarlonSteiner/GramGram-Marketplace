@@ -4,6 +4,6 @@ class DashboardController < ApplicationController
   end
 
   def listings
-    @grannies = current_user.grannies.includes(:reservations)
+    @grannies = current_user.grannies.includes(reservations: :user)
   end
 end
