@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+  get 'reviews/create'
+  get 'reviews/rating:integer'
   get 'grannies/index'
   get 'grannies/show'
   get 'grannies/new'
