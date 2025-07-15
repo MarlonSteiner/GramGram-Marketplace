@@ -1,3 +1,4 @@
+<%# Granny Details %>
 <h1><%= @granny.name %></h1>
 <p><%= @granny.bio %></p>
 <p>Location: <%= @granny.location %></p>
@@ -8,9 +9,20 @@
 <hr>
 
 <h3>Book This Granny</h3>
+
+<% if @reservation.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= simple_form_for([@granny, @reservation]) do |f| %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
+  <%= f.input :start_date, input_html: { min: Date.today } %>
+  <%= f.input :end_date, input_html: { min: Date.today + 1 } %>
   <%= f.button :submit, "Book" %>
 <% end %>
 
@@ -27,5 +39,15 @@
 <% @granny.reviews.each do |review| %>
   <div>
     <p><strong><%= review.user.full_name %></strong>: <%= review.comment %> — <%= review.rating %>⭐</p>
+  </div>
+<% end %>
+
+<% if @reservation.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>

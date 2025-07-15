@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
-  get 'reservations/new'
-  get 'reservations/create'
+  # get 'dashboard/bookings'
+  # get 'dashboard/listings'
+  # get 'reservations/new'
+  # get 'reservations/create'
   devise_for :users
 
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :grannies do
-    resources :reservations, only: [:new, :create]
-    resources :reviews, only: [:create]
+  resources :reservations, only: [] do
+    member do
+      patch :confirm
+      patch :cancel
+    end
   end
 
   get "dashboard/bookings", to: "dashboard#bookings"
