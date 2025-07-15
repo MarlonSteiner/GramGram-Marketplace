@@ -1,2 +1,9 @@
-<h1>Grannies#index</h1>
-<p>Find me in app/views/grannies/index.html.erb</p>
+<h1>All Grannies</h1>
+
+<% @grannies.each do |granny| %>
+  <div>
+    <h2><%= link_to granny.name, granny_path(granny) %></h2>
+    <p><%= granny.location %> — R<%= granny.price %>/day</p>
+    <p><%= granny.bio %></p>
+  </div>
+<% end %>

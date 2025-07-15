@@ -1,2 +1,10 @@
-<h1>Grannies#new</h1>
-<p>Find me in app/views/grannies/new.html.erb</p>
+<h1>New Granny</h1>
+<%= simple_form_for(@granny) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :bio %>
+  <%= f.input :price %>
+  <%= f.input :location %>
+  <%= f.input :available %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit, "Create Granny" %>
+<% end %>

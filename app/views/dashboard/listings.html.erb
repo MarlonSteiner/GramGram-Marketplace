@@ -1,0 +1,25 @@
+<h2>Grannies You Own</h2>
+
+<% @grannies.each do |granny| %>
+  <h4><%= granny.name %></h4>
+  <% granny.reservations.each do |res| %>
+    <div class="card p-2 mb-2">
+      <strong>Booked by:</strong> <%= res.user.full_name %><br>
+      <strong>From:</strong> <%= res.start_date %> — <strong>To:</strong> <%= res.end_date %><br>
+      <strong>Status:</strong> <%= res.status.capitalize %>
+    </div>
+  <% end %>
+<% end %>
+
+<% granny.reservations.each do |res| %>
+  <div class="card p-2 mb-2">
+    <strong>Booked by:</strong> <%= res.user.full_name %><br>
+    <strong>From:</strong> <%= res.start_date %> — <strong>To:</strong> <%= res.end_date %><br>
+    <strong>Status:</strong> <%= res.status.capitalize %><br>
+
+    <% if res.pending? %>
+      <%= button_to "Accept", confirm_reservation_path(reservation), method: :patch, class: "btn btn-success" %>
+      <%= button_to "Reject", cancel_reservation_path(reservation), method: :patch, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+<% end %>
