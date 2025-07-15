@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  # get 'dashboard/bookings'
-  # get 'dashboard/listings'
-  # get 'reservations/new'
-  # get 'reservations/create'
   devise_for :users
 
   root to: "pages#home"
