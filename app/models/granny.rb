@@ -2,14 +2,10 @@ class Granny < ApplicationRecord
   has_many :reservations, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
-  # validates :name, :bio, :location, :price, presence: true
-  # validates :price, numericality: { greater_than: 0 }
+  validates :name, :bio, :location, :price, presence: true
+  validates :price, numericality: { greater_than: 0 }
 
   has_one_attached :photo
-
-  # def owner_name
-  #   user.first_name + " " + user.last_name
-  # end
 
     def owner_name
     user.full_name

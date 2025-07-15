@@ -1,2 +1,31 @@
-<h1>Grannies#show</h1>
-<p>Find me in app/views/grannies/show.html.erb</p>
+<h1><%= @granny.name %></h1>
+<p><%= @granny.bio %></p>
+<p>Location: <%= @granny.location %></p>
+<p>Price: R<%= @granny.price %>/day</p>
+<p>Available: <%= @granny.available ? 'Yes' : 'No' %></p>
+<p>Average Rating: <%= @granny.average_rating %></p>
+
+<hr>
+
+<h3>Book This Granny</h3>
+<%= simple_form_for([@granny, @reservation]) do |f| %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.button :submit, "Book" %>
+<% end %>
+
+<hr>
+
+<h3>Leave a Review</h3>
+<%= simple_form_for([@granny, @review]) do |f| %>
+  <%= f.input :comment %>
+  <%= f.input :rating %>
+  <%= f.button :submit, "Submit Review" %>
+<% end %>
+
+<h3>Reviews:</h3>
+<% @granny.reviews.each do |review| %>
+  <div>
+    <p><strong><%= review.user.full_name %></strong>: <%= review.comment %> — <%= review.rating %>⭐</p>
+  </div>
+<% end %>
