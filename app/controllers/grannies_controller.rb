@@ -4,8 +4,11 @@ class GranniesController < ApplicationController
   end
 
   def show
+    @granny = Granny.find(params[:id])
     @reservation = Reservation.new
+    @reviews = @granny.reviews
     @review = Review.new
+    @average_rating = @reviews.average(:rating)
   end
 
   def new

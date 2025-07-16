@@ -3,13 +3,17 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :reservations, only: [] do
-    member do
-      patch :confirm
-      patch :cancel
-    end
-  end
+resources :grannies do
+  resources :reservations, only: %i[new create]  # Added comma and fixed syntax
+  resources :reviews, only: %i[new create destroy]
+end
 
+resources :reservations, only: [] do
+  member do
+    patch :confirm
+    patch :cancel
+  end
+end
   get "dashboard/bookings", to: "dashboard#bookings"
   get "dashboard/listings", to: "dashboard#listings"
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
