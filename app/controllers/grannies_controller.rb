@@ -3,10 +3,11 @@ class GranniesController < ApplicationController
     @grannies = Granny.all
     # The `geocoded` scope filters only flats with coordinates
     @markers = @grannies.geocoded.map do |granny|
-    {
-      lat: granny.latitude,
-      lng: granny.longitude
-    }
+      {
+        lat: granny.latitude,
+        lng: granny.longitude
+      }
+    end
   end
 
   def show
@@ -29,6 +30,25 @@ class GranniesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    authorize_owner!
+  end
+
+  def update
+    authorize_owner!
+    if @granny.update(granny_params)
+      redirect_to granny_path(@granny), notice: "Granny updated!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    authorize_owner!
+    @granny.destroy
+    redirect_to grannies_path, notice: "Granny unlisted."
   end
 
   private
