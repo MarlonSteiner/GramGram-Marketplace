@@ -1,6 +1,12 @@
 class GranniesController < ApplicationController
   def index
     @grannies = Granny.all
+    # The `geocoded` scope filters only flats with coordinates
+    @markers = @grannies.geocoded.map do |granny|
+    {
+      lat: granny.latitude,
+      lng: granny.longitude
+    }
   end
 
   def show

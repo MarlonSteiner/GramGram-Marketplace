@@ -48,8 +48,9 @@ class ReservationsController < ApplicationController
   end
 
   def authorize_owner!
-  @reservation = Reservation.find(params[:id])
-  unless @reservation.granny.user == current_user
-    redirect_to root_path, alert: "You are not authorized to perform this action."
+    @reservation = Reservation.find(params[:id])
+    unless @reservation.granny.user == current_user
+      redirect_to root_path, alert: "You are not authorized to perform this action."
+    end
   end
 end

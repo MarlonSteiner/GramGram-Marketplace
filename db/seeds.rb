@@ -379,11 +379,25 @@ users_data.each do |user_attrs|
   puts "Created user: #{user.email}"
 end
 
-# Create grannies using actual user IDs
+# Create grannies using actual user IDs and attach photos
 grannies_data.each_with_index do |granny_attrs, index|
   # Use the actual created user (index matches the user we want)
   granny_attrs[:user_id] = created_users[index].id
-  Granny.create!(granny_attrs)
+  granny = Granny.create!(granny_attrs)
+
+  # Attach photo to the granny
+  file_path = Rails.root.join('app', 'assets', 'images', 'grannies', "Granny-#{index + 1}.svg")
+
+  if File.exist?(file_path)
+    granny.photo.attach(
+      io: File.open(file_path),
+      filename: "Granny-#{index + 1}.svg",
+      content_type: 'image/svg+xml'
+    )
+    puts "✅ Attached photo to #{granny.name}"
+  else
+    puts "❌ Photo not found for #{granny.name}: #{file_path}"
+  end
 end
 
 puts "Created #{Granny.count} grannies"
