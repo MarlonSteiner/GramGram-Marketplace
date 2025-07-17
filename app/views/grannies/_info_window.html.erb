@@ -1,0 +1,7 @@
+<h2><%= granny.name %></h2>
+<div>
+  <%= cl_image_tag @granny.image.key,
+    class: "card-img-top",
+    alt: "#{granny.name} picture"%>
+</div>
+<p><%= granny.location %></p>

@@ -1,13 +1,6 @@
 class GranniesController < ApplicationController
   def index
     @grannies = Granny.all
-    # The `geocoded` scope filters only flats with coordinates
-    @markers = @grannies.geocoded.map do |granny|
-      {
-        lat: granny.latitude,
-        lng: granny.longitude
-      }
-    end
   end
 
   def show
@@ -16,6 +9,13 @@ class GranniesController < ApplicationController
     @reviews = @granny.reviews
     @review = Review.new
     @average_rating = @reviews.average(:rating)
+    # The `geocoded` scope coordinates
+    @markers =
+      [
+        lat: @granny.latitude,
+        lng: @granny.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { granny: @granny })
+      ]
   end
 
   def new
@@ -58,6 +58,6 @@ class GranniesController < ApplicationController
   end
 
   def granny_params
-    params.require(:granny).permit(:name, :bio, :price, :location, :available, :photo)
+    params.require(:granny).permit(:name, :bio, :price, :location, :available, :image)
   end
 end
