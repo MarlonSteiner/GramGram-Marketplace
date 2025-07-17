@@ -18,13 +18,12 @@ class GranniesController < ApplicationController
     @review = Review.new
     @average_rating = @reviews.average(:rating)
     # The `geocoded` scope coordinates
-    @markers = @grannies.geocoded.map do |granny|
-      {
-        lat: granny.latitude,
-        lng: granny.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { granny: granny })
-      }
-    end
+    @markers =
+      [
+        lat: @granny.latitude,
+        lng: @granny.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { granny: @granny })
+      ]
   end
 
   def new
