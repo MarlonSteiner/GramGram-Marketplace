@@ -470,3 +470,114 @@
     min-width: 260px;
   }
 }
+
+// Granny Marketplace Section
+.granny-marketplace {
+  padding: 4rem 0;
+  background: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Section Header
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: $primary;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: $text;
+  margin-bottom: 0;
+}
+
+// Category Navigation
+.category-nav {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  padding: 1rem 0.5rem;
+  text-decoration: none;
+  color: lighten($text, 20%);
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+
+  &:hover,
+  &.active {
+    color: $primary;
+    border-bottom-color: $primary;
+    text-decoration: none;
+  }
+}
+
+.category-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.category-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+#carousel-container {
+  text-align: center;
+  padding: 2rem;
+  color: $text;
+}
+
+// Section Header
+.section-title {
+  font-size: 2.5rem;
+  color: #3e3e3e;  // your $primary color
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #3e3e3e;  // your $text color
+  margin-bottom: 0;
+}
+
+// Category Navigation
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  padding: 1rem 0.5rem;
+  text-decoration: none;
+  color: #666;  // lighter version of your text color
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+
+  &:hover,
+  &.active {
+    color: #a288e3;;  // your $primary color
+    border-bottom-color: #a288e3;  // your $primary color
+    text-decoration: none;
+  }
+}
