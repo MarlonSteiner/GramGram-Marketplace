@@ -50,9 +50,9 @@ users_data.each do |user_attrs|
   puts "Created user: #{user.email}"
 end
 
-# Create grannies using actual user IDs and attach photos
+# Create grannies using actual user IDs and attach images
 grannies_data.each_with_index do |granny_attrs, index|
-  # Use the actual created user (index matches the user we want)
+  #Use the actual created user (index matches the user we want)
   granny_attrs[:user_id] = created_users[index].id
   granny = Granny.create!(granny_attrs)
 

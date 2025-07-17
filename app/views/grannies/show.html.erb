@@ -1,4 +1,5 @@
-<div class="container m-4">
+<!--Granny Section-->
+<div class="container m-9">
   <div class="row">
     <div class="col">
       <%= image_tag "icons/arrow_icon.svg" %>
@@ -8,24 +9,27 @@
     </div>
     <div class="col">
       <div><h2 class="text-uppercase fw-bold text-dark mb-0" style="letter-spacing": 2px;><%= @granny.name %></h2></div>
-      <div class="container">
-        <div class="row">
-
-        </div>
-          <h4 class="fw-bold">Stats</h4>
-          <p class="fw-semibold">Health -</p>
-          <p class="fw-semibold">Speed -</p>
-          <p class="fw-semibold">Wisdom -</p>
-          <p class="fw-semibold">Teeth -</p>
-          <div class="text-center mt-auto">
-          <h3 class="text-success fw-bold mb-0">
-            $<%= @granny.price %> / day
-          </h3>
+      </div>
+        <h4 class="fw-bold">Stats</h4>
+        <p class="fw-semibold">Health -</p><p><%= @granny.stats_health %></p>
+        <p class="fw-semibold">Speed -</p><p><%= @granny.stats_speed %></p>
+        <p class="fw-semibold">Wisdom -</p><p><%= @granny.stats_wisdom %></p>
+        <p class="fw-semibold">Teeth -</p><p><%= @granny.stats_speed %></p>
+        <div class="text-center mt-auto">
+          <h3 class="text-success fw-bold mb-0">$<%= @granny.price %> / day</h3>
         </div>
       </div>
-      <div>
+      <div class="row">
+        <button>Book</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!--Granny Section-->
+
+
+<!--Stuff-->
   </div>
 </div>
 <%# Granny Details %>
