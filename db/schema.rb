@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_16_152841) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_17_133654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_16_152841) do
     t.string "image"
     t.float "latitude"
     t.float "longitude"
+    t.string "category"
+    t.integer "stats_speed"
+    t.integer "stats_health"
+    t.integer "stats_wisdom"
+    t.integer "stats_teeth"
+    t.boolean "superhost", default: false
+    t.integer "rating"
+    t.integer "review_count", default: 0
+    t.integer "age"
     t.index ["user_id"], name: "index_grannies_on_user_id"
   end
 

@@ -1,1 +1,472 @@
 // Specific CSS for your home-page
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(180deg, #f5f5f5 0%, #fff 100%);
+}
+
+.title {
+  font-size: 3rem;
+  color: $primary;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  font-size: 1.2rem;
+  color: $text;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: $surface;
+  border-radius: 12px;
+  padding: 2rem;
+  display: inline-block;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.pic {
+  width: 150px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  background-color: $primary;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: darken($primary, 10%);
+  }
+}
+
+// Add this to your app/assets/stylesheets/_home.scss file
+
+// Keep all your existing styles and add these below:
+
+// Granny Marketplace Section
+.granny-marketplace {
+  padding: 4rem 0;
+  background: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Section Header
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: $primary;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: $text;
+  margin-bottom: 0;
+}
+
+// Category Navigation
+.category-nav {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+
+  // Hide scrollbar
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  padding: 1rem 0.5rem;
+  text-decoration: none;
+  color: lighten($text, 20%);
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  &:hover,
+  &.active {
+    color: $primary;
+    border-bottom-color: $primary;
+    text-decoration: none;
+  }
+}
+
+.category-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  filter: grayscale(1);
+  transition: filter 0.3s ease;
+
+  .category-item:hover &,
+  .category-item.active & {
+    filter: grayscale(0);
+  }
+}
+
+.category-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+// Filter Buttons
+.filters-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid lighten($primary, 40%);
+  background: white;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  color: $primary;
+
+  &:hover {
+    border-color: $primary;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  &.active {
+    background: $primary;
+    color: white;
+    border-color: $primary;
+  }
+}
+
+// Carousel Sections
+.carousel-section {
+  margin-bottom: 4rem;
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.carousel-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: $primary;
+  margin: 0;
+}
+
+.carousel-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-button {
+  width: 40px;
+  height: 40px;
+  border: 2px solid lighten($primary, 40%);
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: $primary;
+
+  &:hover {
+    border-color: $primary;
+    background: $primary;
+    color: white;
+    transform: scale(1.1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Card Grid
+.card-grid {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Granny Cards
+.granny-card {
+  min-width: 280px;
+  background: $surface;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  }
+}
+
+.card-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+
+  .granny-card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.heart-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: white;
+    transform: scale(1.1);
+  }
+}
+
+.availability-indicator {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 0.25rem 0.75rem;
+  background: rgba(34, 34, 34, 0.8);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &.available {
+    background: rgba(40, 167, 69, 0.9);
+  }
+
+  &.unavailable {
+    background: rgba(220, 53, 69, 0.9);
+  }
+}
+
+// Card Content
+.card-content {
+  padding: 1.25rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.granny-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: $primary;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star-icon {
+  color: #ffd700;
+  font-size: 0.9rem;
+}
+
+.rating-number {
+  font-size: 0.9rem;
+  color: $text;
+  font-weight: 600;
+}
+
+.location {
+  color: lighten($text, 20%);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.granny-bio {
+  color: $text;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Pokemon Stats
+.granny-stats {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid lighten($text, 50%);
+  border-bottom: 1px solid lighten($text, 50%);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: $primary;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: lighten($text, 20%);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0.25rem;
+}
+
+.price-container {
+  margin-top: 0.75rem;
+}
+
+.price {
+  color: $primary;
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  .price-period {
+    font-weight: normal;
+    color: $text;
+  }
+}
+
+// Superhost Badge
+.superhost-badge {
+  background: $primary;
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+// No Results State
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: lighten($text, 20%);
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: $primary;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .granny-marketplace {
+    padding: 2rem 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .category-nav {
+    gap: 1rem;
+    padding: 0.5rem 0;
+  }
+
+  .filters-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .carousel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .granny-card {
+    min-width: 260px;
+  }
+}
