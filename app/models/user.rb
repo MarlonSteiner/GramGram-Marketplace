@@ -15,4 +15,22 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def owner_of?(granny)
+    granny.user == self
+  end
+
+  def renter_of?(reservation)
+    reservation.user == self
+  end
 end
+
+# <% if current_user.owner_of?(granny) %>
+#   <h3>Reservation Requests:</h3>
+#   <!-- Loop over reservations for this granny -->
+# <% end %>
+
+# <% if current_user.renter_of?(reservation) %>
+#   <h3>Your Booking Details:</h3>
+#   <!-- Renter-only stuff here -->
+# <% end %>
