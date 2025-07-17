@@ -389,17 +389,20 @@ grannies_data.each_with_index do |granny_attrs, index|
   file_path = Rails.root.join('app', 'assets', 'images', 'grannies', "Granny-#{index + 1}.svg")
 
   if File.exist?(file_path)
-    granny.photo.attach(
-      io: File.open(file_path),
-      filename: "Granny-#{index + 1}.svg",
-      content_type: 'image/svg+xml'
-    )
-    puts "✅ Attached photo to #{granny.name}"
+    # Open the file and attach it - this will trigger Cloudinary upload
+    File.open(file_path) do |file|
+      granny.image.attach(
+        io: file,
+        filename: "Granny-#{index + 1}.svg",
+        content_type: 'image/svg+xml'
+      )
+    end
+
+    # Wait a moment for the upload to complete
+    sleep(0.5)
+
+    puts "✅ Attached and uploaded photo to #{granny.name}"
   else
     puts "❌ Photo not found for #{granny.name}: #{file_path}"
   end
 end
-
-puts "Created #{Granny.count} grannies"
-
-puts "Seeding completed! #{User.count} users in database."

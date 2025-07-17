@@ -47,6 +47,6 @@ class GranniesController < ApplicationController
   end
 
   def granny_params
-    params.require(:granny).permit(:name, :bio, :price, :location, :available, :photo)
+    params.require(:granny).permit(:name, :bio, :price, :location, :available, :image)
   end
 end

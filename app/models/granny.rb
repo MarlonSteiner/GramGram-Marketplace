@@ -5,7 +5,7 @@ class Granny < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
   # Cloudinary (Active Storage)
-  has_one_attached :photo
+  has_one_attached :image
 
   # Added Geocoding
   geocoded_by :location
