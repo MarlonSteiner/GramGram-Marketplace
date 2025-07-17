@@ -30,8 +30,6 @@ gem "ostruct"
 
 gem "devise"
 
-gem "dotenv-rails"
-
 gem "cloudinary"
 
 gem "geocoder"

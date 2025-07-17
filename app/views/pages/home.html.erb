@@ -1,10 +1,57 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="hero">
+  <h1 class="title">GramGram</h1>
+  <p class="tag">Stay with grannies. Feel at home.</p>
 
-  <!-- Grandma Card for visual backend setup button-->
-  <div>
-    <!-- Grandma Card for visual backend setup button-->
-    <%= image_tag 'granny.svg', alt: 'granny' %>
-
-    <button>Helen</button>
+  <div class="card">
+    <%= image_tag 'granny.svg', alt: 'Granny', class: "pic" %>
+    <button class="btn">Discover Grannies</button>
   </div>
+</div>
+
+<!-- New carousel section -->
+<div class="granny-marketplace">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 class="section-title">Amazing grannies worldwide</h2>
+      <p class="section-subtitle">Discover grannies with unique personalities and special skills</p>
+    </div>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav" data-controller="category-filter">
+      <a href="#" class="category-item active" data-category="all" data-action="click->category-filter#filterCategory">
+        <div class="category-icon">🏠</div>
+        <span class="category-label">All Grannies</span>
+      </a>
+      <a href="#" class="category-item" data-category="cat-lovers" data-action="click->category-filter#filterCategory">
+        <div class="category-icon">🐱</div>
+        <span class="category-label">Cat Lovers</span>
+      </a>
+      <a href="#" class="category-item" data-category="chefs" data-action="click->category-filter#filterCategory">
+        <div class="category-icon">👩‍🍳</div>
+        <span class="category-label">Master Chefs</span>
+      </a>
+      <a href="#" class="category-item" data-category="healers" data-action="click->category-filter#filterCategory">
+        <div class="category-icon">🌿</div>
+        <span class="category-label">Healers</span>
+      </a>
+      <a href="#" class="category-item" data-category="adventurers" data-action="click->category-filter#filterCategory">
+        <div class="category-icon">🗺️</div>
+        <span class="category-label">Adventurers</span>
+      </a>
+      <a href="#" class="category-item" data-category="crafters" data-action="click->category-filter#filterCategory">
+        <div class="category-icon">🎨</div>
+        <span class="category-label">Crafters</span>
+      </a>
+      <a href="#" class="category-item" data-category="book-lovers" data-action="click->category-filter#filterCategory">
+        <div class="category-icon">📚</div>
+        <span class="category-label">Book Lovers</span>
+      </a>
+    </nav>
+
+    <!-- Carousel Container -->
+    <div id="carousel-container" data-controller="granny-carousel">
+      <!-- Carousels will be dynamically generated -->
+    </div>
+  </div>
+</div>

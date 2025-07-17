@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_16_152841) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_17_154944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_16_152841) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "granny_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["granny_id"], name: "index_favorites_on_granny_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "grannies", force: :cascade do |t|
     t.string "name"
     t.text "bio"
@@ -54,6 +63,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_16_152841) do
     t.string "image"
     t.float "latitude"
     t.float "longitude"
+    t.string "category"
+    t.integer "stats_speed"
+    t.integer "stats_health"
+    t.integer "stats_wisdom"
+    t.integer "stats_teeth"
+    t.boolean "superhost", default: false
+    t.integer "rating"
+    t.integer "review_count", default: 0
+    t.integer "age"
     t.index ["user_id"], name: "index_grannies_on_user_id"
   end
 
@@ -96,6 +114,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_16_152841) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "grannies"
+  add_foreign_key "favorites", "users"
   add_foreign_key "grannies", "users"
   add_foreign_key "reservations", "grannies"
   add_foreign_key "reservations", "users"
