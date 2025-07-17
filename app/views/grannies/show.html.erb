@@ -1,4 +1,13 @@
-<%= cl_image_tag @granny.image.key %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag "icons/arrow.svg" %>
+    </div>
+    <div class="col">
+      <%= cl_image_tag @granny.image.key %>
+    </div>
+  </div>
+</div>
 <%# Granny Details %>
 <h1><%= @granny.name %></h1>
 <p><%= @granny.bio %></p>
