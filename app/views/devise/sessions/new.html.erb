@@ -1,20 +1,58 @@
-<h2>Log in</h2>
+<!-- app/views/devise/sessions/new.html.erb -->
+<div class="login-page-wrapper">
+  <div class="login-container">
+    <div class="login-header">
+      <h1>GramGram</h1>
+      <p>Connect with your world</p>
+    </div>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <div class="login-form">
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "gramgram-login-form" }) do |f| %>
+        <div class="form-inputs">
+          <div class="form-group">
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: {
+                          autocomplete: "email",
+                          placeholder: "Enter your email",
+                          class: "form-control"
+                        },
+                        label_html: { class: "form-label" },
+                        wrapper_html: { class: "input-wrapper" } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :password,
+                        required: false,
+                        input_html: {
+                          autocomplete: "current-password",
+                          placeholder: "Enter your password",
+                          class: "form-control"
+                        },
+                        label_html: { class: "form-label" },
+                        wrapper_html: { class: "input-wrapper" } %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="remember-me">
+              <%= f.input :remember_me,
+                          as: :boolean,
+                          input_html: { class: "remember-checkbox" },
+                          label_html: { class: "remember-label" },
+                          wrapper_html: { class: "remember-wrapper" } %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Sign In", class: "login-button" %>
+        </div>
+      <% end %>
+
+      <div class="devise-links">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
