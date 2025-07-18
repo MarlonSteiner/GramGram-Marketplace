@@ -1,14 +1,57 @@
-<div class="hero">
-  <h1 class="title">GramGram</h1>
-  <p class="tag">Stay with grannies. Feel at home.</p>
+<!-- Airbnb-Style Search Header -->
+<div class="search-hero">
+  <div class="search-container">
+    <h1 class="search-title">Find your perfect granny</h1>
+    <p class="search-subtitle">Discover unique grannies with special skills worldwide</p>
 
-  <div class="card">
-    <%= image_tag 'granny.svg', alt: 'Granny', class: "pic" %>
-    <button class="btn">Discover Grannies</button>
+    <!-- Search Bar -->
+    <div class="search-bar" data-controller="granny-search">
+      <div class="search-field">
+        <label class="search-label">Category</label>
+        <select class="search-input" data-granny-search-target="category" data-action="change->granny-search#filterResults">
+          <option value="">Any category</option>
+          <option value="cat-lovers">Cat Lovers</option>
+          <option value="chefs">Master Chefs</option>
+          <option value="healers">Healers</option>
+          <option value="adventurers">Adventurers</option>
+          <option value="crafters">Crafters</option>
+          <option value="book-lovers">Book Lovers</option>
+        </select>
+      </div>
+
+      <div class="search-field">
+        <label class="search-label">Check-in</label>
+        <input type="date" class="search-input" data-granny-search-target="checkin" data-action="change->granny-search#filterResults">
+      </div>
+
+      <div class="search-field">
+        <label class="search-label">Check-out</label>
+        <input type="date" class="search-input" data-granny-search-target="checkout" data-action="change->granny-search#filterResults">
+      </div>
+
+      <div class="search-field">
+        <label class="search-label">Max Price</label>
+        <select class="search-input" data-granny-search-target="price" data-action="change->granny-search#filterResults">
+          <option value="">Any price</option>
+          <option value="50">Under $50</option>
+          <option value="75">Under $75</option>
+          <option value="100">Under $100</option>
+          <option value="125">Under $125</option>
+          <option value="150">Under $150</option>
+        </select>
+      </div>
+
+      <button class="search-button" data-action="click->granny-search#search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        Search
+      </button>
+    </div>
   </div>
 </div>
 
-<!-- New carousel section -->
+<!-- Marketplace Section -->
 <div class="granny-marketplace">
   <div class="container">
     <!-- Section Header -->
@@ -19,31 +62,31 @@
 
     <!-- Category Navigation -->
     <nav class="category-nav" data-controller="category-filter">
-      <a href="#" class="category-item active" data-category="all" data-action="click->category-filter#filterCategory">
+      <a class="category-item active" data-category="all" data-action="click->category-filter#filterCategory">
         <div class="category-icon">🏠</div>
         <span class="category-label">All Grannies</span>
       </a>
-      <a href="#" class="category-item" data-category="cat-lovers" data-action="click->category-filter#filterCategory">
+      <a class="category-item" data-category="cat-lovers" data-action="click->category-filter#filterCategory">
         <div class="category-icon">🐱</div>
         <span class="category-label">Cat Lovers</span>
       </a>
-      <a href="#" class="category-item" data-category="chefs" data-action="click->category-filter#filterCategory">
+      <a class="category-item" data-category="chefs" data-action="click->category-filter#filterCategory">
         <div class="category-icon">👩‍🍳</div>
         <span class="category-label">Master Chefs</span>
       </a>
-      <a href="#" class="category-item" data-category="healers" data-action="click->category-filter#filterCategory">
+      <a class="category-item" data-category="healers" data-action="click->category-filter#filterCategory">
         <div class="category-icon">🌿</div>
         <span class="category-label">Healers</span>
       </a>
-      <a href="#" class="category-item" data-category="adventurers" data-action="click->category-filter#filterCategory">
+      <a class="category-item" data-category="adventurers" data-action="click->category-filter#filterCategory">
         <div class="category-icon">🗺️</div>
         <span class="category-label">Adventurers</span>
       </a>
-      <a href="#" class="category-item" data-category="crafters" data-action="click->category-filter#filterCategory">
+      <a class="category-item" data-category="crafters" data-action="click->category-filter#filterCategory">
         <div class="category-icon">🎨</div>
         <span class="category-label">Crafters</span>
       </a>
-      <a href="#" class="category-item" data-category="book-lovers" data-action="click->category-filter#filterCategory">
+      <a class="category-item" data-category="book-lovers" data-action="click->category-filter#filterCategory">
         <div class="category-icon">📚</div>
         <span class="category-label">Book Lovers</span>
       </a>
@@ -51,7 +94,7 @@
 
     <!-- Carousel Container -->
     <div id="carousel-container" data-controller="granny-carousel">
-      <!-- Carousels will be dynamically generated -->
+      <!-- Cards will appear here from Stimulus controller -->
     </div>
   </div>
 </div>

@@ -3,38 +3,52 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["container"]
 
-  async connect() {
-  this.currentCategory = 'all'
-  this.currentFilter = 'all'
-  this.favorites = new Set()
-
-  // Fetch from your Rails API
-  await this.loadGrannies()
-    this.renderContent()
-  }
-
-  async loadGrannies() {
-    try {
-      const response = await fetch('/api/grannies')
-      this.granniesData = await response.json()
-    } catch (error) {
-      console.error('Failed to load grannies:', error)
-      // Keep sample data as fallback
-    }
-  }
-
   connect() {
+    console.log("Granny carousel connected!")
     this.currentCategory = 'all'
     this.currentFilter = 'all'
     this.favorites = new Set()
+
+    // Sample data (we'll connect to your database later)
+    this.granniesData = [
+      {
+        id: 1, name: "Yuki Sato", location: "Tokyo, Japan", price: 75, category: "cat-lovers",
+        bio: "Cat lover from Japan who has rescued many street cats. I teach origami.",
+        available: true, stats_speed: 3, stats_health: 8, stats_wisdom: 9, stats_teeth: 6,
+        superhost: true, rating: 4, review_count: 23, age: 72
+      },
+      {
+        id: 2, name: "Sakura Nakamura", location: "Tokyo, Japan", price: 110, category: "chefs",
+        bio: "Master chef specializing in traditional Japanese cuisine.",
+        available: true, stats_speed: 6, stats_health: 9, stats_wisdom: 8, stats_teeth: 9,
+        superhost: true, rating: 5, review_count: 45, age: 69
+      },
+      {
+        id: 3, name: "Tomoko Yamamoto", location: "Kyoto, Japan", price: 95, category: "healers",
+        bio: "Traditional healer specializing in herbal medicine and acupuncture.",
+        available: true, stats_speed: 5, stats_health: 10, stats_wisdom: 9, stats_teeth: 7,
+        superhost: true, rating: 5, review_count: 51, age: 71
+      }
+    ]
+
     this.renderContent()
   }
 
   renderContent() {
+    console.log("renderContent called!")
+    const container = document.getElementById('carousel-container')
+    console.log("Container found:", container)
+
+    if (!container) {
+      console.error("Carousel container not found!")
+      return
+    }
+
     const filteredGrannies = this.getFilteredGrannies()
+    console.log("Filtered grannies:", filteredGrannies)
 
     if (filteredGrannies.length === 0) {
-      this.containerTarget.innerHTML = this.createNoResultsHTML()
+      container.innerHTML = this.createNoResultsHTML()
       return
     }
 
@@ -48,37 +62,27 @@ export default class extends Controller {
       categories[categoryName].push(granny)
     })
 
+    console.log("Categories:", categories)
+
     // Render carousels
     let html = ''
     Object.keys(categories).forEach(categoryName => {
       html += this.createCarouselSection(categoryName, categories[categoryName])
     })
 
-    this.containerTarget.innerHTML = html
+    console.log("Generated HTML:", html.substring(0, 200) + "...")
+    container.innerHTML = html
+    console.log("HTML inserted into container")
   }
 
   getFilteredGrannies() {
+    if (!this.granniesData) return []
+
     let filtered = [...this.granniesData]
 
     // Apply category filter
     if (this.currentCategory !== 'all') {
       filtered = filtered.filter(granny => granny.category === this.currentCategory)
-    }
-
-    // Apply additional filters
-    switch (this.currentFilter) {
-      case 'available':
-        filtered = filtered.filter(granny => granny.availability === 'available')
-        break
-      case 'price-low':
-        filtered = filtered.filter(granny => granny.price < 100)
-        break
-      case 'price-high':
-        filtered = filtered.filter(granny => granny.price >= 150)
-        break
-      case 'high-rated':
-        filtered = filtered.filter(granny => granny.superhost)
-        break
     }
 
     return filtered
@@ -123,15 +127,22 @@ export default class extends Controller {
     const heartFilled = this.favorites.has(granny.id)
     const superhostBadge = granny.superhost ? '<span class="superhost-badge">SUPERHOST</span>' : ''
 
+    // Use the image.key format like your ERB template
+    const imageUrl = granny.image ? `https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/c_fill,h_250,w_300/${granny.image}` : null
+
     return `
       <div class="granny-card" data-id="${granny.id}" data-action="click->granny-carousel#showDetails">
         <div class="card-image-container">
-          <img src="${granny.image}" alt="${granny.name}" class="card-image">
+          ${imageUrl
+            ? `<img src="${imageUrl}" alt="${granny.name}" class="card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+            : ''
+          }
+          <div class="card-placeholder" ${imageUrl ? 'style="display: none;"' : ''}>👵</div>
           <button class="heart-button" data-action="click->granny-carousel#toggleFavorite" data-granny-id="${granny.id}">
             ${heartFilled ? '❤️' : '🤍'}
           </button>
-          <div class="availability-indicator ${granny.availability}">
-            ${granny.availability === 'available' ? 'Available' : 'Unavailable'}
+          <div class="availability-badge ${granny.available ? '' : 'unavailable'}">
+            ${granny.available ? 'Available' : 'Unavailable'}
           </div>
         </div>
         <div class="card-content">
@@ -139,7 +150,7 @@ export default class extends Controller {
             <h4 class="granny-name">${granny.name}${superhostBadge}</h4>
             <div class="rating">
               <span class="star-icon">★</span>
-              <span class="rating-number">${granny.rating}</span>
+              <span class="rating-number">${granny.rating}.0</span>
             </div>
           </div>
           <div class="location">${granny.location}</div>
@@ -147,19 +158,19 @@ export default class extends Controller {
 
           <div class="granny-stats">
             <div class="stat">
-              <div class="stat-value">${granny.stats.speed}/10</div>
+              <div class="stat-value">${granny.stats_speed}/10</div>
               <div class="stat-label">Speed</div>
             </div>
             <div class="stat">
-              <div class="stat-value">${granny.stats.health}/10</div>
+              <div class="stat-value">${granny.stats_health}/10</div>
               <div class="stat-label">Health</div>
             </div>
             <div class="stat">
-              <div class="stat-value">${granny.stats.wisdom}/10</div>
+              <div class="stat-value">${granny.stats_wisdom}/10</div>
               <div class="stat-label">Wisdom</div>
             </div>
             <div class="stat">
-              <div class="stat-value">${granny.stats.teeth}/10</div>
+              <div class="stat-value">${granny.stats_teeth}/10</div>
               <div class="stat-label">Teeth</div>
             </div>
           </div>
@@ -176,7 +187,7 @@ export default class extends Controller {
 
   createNoResultsHTML() {
     return `
-      <div class="no-results">
+      <div style="text-align: center; padding: 3rem; color: #666;">
         <h3>No grannies found</h3>
         <p>Try adjusting your search or removing filters</p>
       </div>
@@ -214,18 +225,11 @@ export default class extends Controller {
 
   showDetails(event) {
     const grannyId = event.currentTarget.dataset.id
-    // Navigate to granny show page
     window.location.href = `/grannies/${grannyId}`
   }
 
-  // Methods called by other controllers
   filterByCategory(category) {
     this.currentCategory = category
-    this.renderContent()
-  }
-
-  filterByType(filter) {
-    this.currentFilter = filter
     this.renderContent()
   }
 }
