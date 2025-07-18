@@ -41,12 +41,20 @@
         </select>
       </div>
 
-      <button class="search-button" data-action="click->granny-search#search">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-        Search
-      </button>
+      <div class="search-field search-buttons">
+        <button class="search-button" data-action="click->granny-search#search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          Search
+        </button>
+        <button class="clear-button" data-action="click->granny-search#clearSearch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+          Clear
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -92,9 +100,30 @@
       </a>
     </nav>
 
-    <!-- Carousel Container -->
-    <div id="carousel-container" data-controller="granny-carousel">
-      <!-- Cards will appear here from Stimulus controller -->
+    <!-- Carousel Container WITH REAL DATA -->
+    <div id="carousel-container"
+        data-controller="granny-carousel"
+        data-granny-carousel-grannies-value="<%= @grannies.map { |g|
+          {
+            id: g.id,
+            name: g.name,
+            location: g.location,
+            price: g.price,
+            category: g.category,
+            bio: g.bio,
+            available: g.available,
+            stats_speed: g.stats_speed,
+            stats_health: g.stats_health,
+            stats_wisdom: g.stats_wisdom,
+            stats_teeth: g.stats_teeth,
+            superhost: g.superhost,
+            rating: g.rating,
+            review_count: g.review_count,
+            age: g.age,
+            image_url: g.image.attached? ? url_for(g.image) : nil
+          }
+        }.to_json %>">
+      <!-- Cards will appear here -->
     </div>
   </div>
 </div>

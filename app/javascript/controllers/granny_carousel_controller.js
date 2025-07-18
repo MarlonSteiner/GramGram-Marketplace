@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["container"]
+  static values = { grannies: Array }  // ADD THIS LINE
 
   connect() {
     console.log("Granny carousel connected!")
@@ -9,28 +10,41 @@ export default class extends Controller {
     this.currentFilter = 'all'
     this.favorites = new Set()
 
-    // Sample data (we'll connect to your database later)
-    this.granniesData = [
-      {
-        id: 1, name: "Yuki Sato", location: "Tokyo, Japan", price: 75, category: "cat-lovers",
-        bio: "Cat lover from Japan who has rescued many street cats. I teach origami.",
-        available: true, stats_speed: 3, stats_health: 8, stats_wisdom: 9, stats_teeth: 6,
-        superhost: true, rating: 4, review_count: 23, age: 72
-      },
-      {
-        id: 2, name: "Sakura Nakamura", location: "Tokyo, Japan", price: 110, category: "chefs",
-        bio: "Master chef specializing in traditional Japanese cuisine.",
-        available: true, stats_speed: 6, stats_health: 9, stats_wisdom: 8, stats_teeth: 9,
-        superhost: true, rating: 5, review_count: 45, age: 69
-      },
-      {
-        id: 3, name: "Tomoko Yamamoto", location: "Kyoto, Japan", price: 95, category: "healers",
-        bio: "Traditional healer specializing in herbal medicine and acupuncture.",
-        available: true, stats_speed: 5, stats_health: 10, stats_wisdom: 9, stats_teeth: 7,
-        superhost: true, rating: 5, review_count: 51, age: 71
-      }
-    ]
+    // REPLACE the loadRealGrannies section with this:
+    // Use grannies passed from Rails via Stimulus values
+    if (this.granniesValue && this.granniesValue.length > 0) {
+      this.granniesData = this.granniesValue
+      console.log("Using grannies from Rails Stimulus values:", this.granniesData.length)
+    } else {
+      console.log("No grannies from Stimulus values, trying API...")
+      this.loadRealGrannies()
+    }
+    this.renderContent()
+  }
 
+  async loadRealGrannies() {
+    try {
+      // Fetch grannies from your Rails controller
+      const response = await fetch('/grannies.json')
+      this.granniesData = await response.json()
+      console.log("Loaded grannies from database:", this.granniesData.length)
+      this.renderContent()
+    } catch (error) {
+      console.error('Failed to load grannies from database:', error)
+      // Fallback: try to get grannies passed from Rails
+      this.loadGranniesFromRails()
+    }
+  }
+
+  loadGranniesFromRails() {
+    // Alternative: Get grannies passed from your Rails controller
+    if (window.granniesData) {
+      this.granniesData = window.granniesData
+      console.log("Using grannies from Rails:", this.granniesData.length)
+    } else {
+      console.error("No grannies data found!")
+      this.granniesData = []
+    }
     this.renderContent()
   }
 
@@ -80,9 +94,29 @@ export default class extends Controller {
 
     let filtered = [...this.granniesData]
 
-    // Apply category filter
+    // Apply category filter (from category navigation OR search)
     if (this.currentCategory !== 'all') {
       filtered = filtered.filter(granny => granny.category === this.currentCategory)
+    }
+
+    // Apply search filters if they exist
+    if (this.searchCriteria) {
+      // Category filter from search
+      if (this.searchCriteria.category) {
+        filtered = filtered.filter(granny => granny.category === this.searchCriteria.category)
+      }
+
+      // Price filter from search
+      if (this.searchCriteria.maxPrice) {
+        const maxPrice = parseInt(this.searchCriteria.maxPrice)
+        filtered = filtered.filter(granny => granny.price <= maxPrice)
+      }
+
+      // Date availability filter (for now, just filter available grannies)
+      // Later you can add proper date checking logic
+      if (this.searchCriteria.checkin && this.searchCriteria.checkout) {
+        filtered = filtered.filter(granny => granny.available === true)
+      }
     }
 
     return filtered
@@ -127,17 +161,24 @@ export default class extends Controller {
     const heartFilled = this.favorites.has(granny.id)
     const superhostBadge = granny.superhost ? '<span class="superhost-badge">SUPERHOST</span>' : ''
 
-    // Use the image.key format like your ERB template
-    const imageUrl = granny.image ? `https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/c_fill,h_250,w_300/${granny.image}` : null
+    // Debug: Log the image information
+    console.log(`Granny ${granny.name}:`, {
+      image_key: granny.image_key,
+      image_url: granny.image_url,
+      has_image_key: !!granny.image_key,
+      has_image_url: !!granny.image_url
+    })
+
+    // Use the image_url approach first
+    const imageUrl = granny.image_url
 
     return `
       <div class="granny-card" data-id="${granny.id}" data-action="click->granny-carousel#showDetails">
         <div class="card-image-container">
-          ${imageUrl
-            ? `<img src="${imageUrl}" alt="${granny.name}" class="card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
-            : ''
+          ${imageUrl ?
+            `<img src="${imageUrl}" alt="${granny.name}" class="card-image" onload="console.log('Image loaded for ${granny.name}')" onerror="console.log('Image failed for ${granny.name}:', this.src)">` :
+            `<div style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; height: 250px; color: #999;">No Image</div>`
           }
-          <div class="card-placeholder" ${imageUrl ? 'style="display: none;"' : ''}>👵</div>
           <button class="heart-button" data-action="click->granny-carousel#toggleFavorite" data-granny-id="${granny.id}">
             ${heartFilled ? '❤️' : '🤍'}
           </button>
@@ -230,6 +271,16 @@ export default class extends Controller {
 
   filterByCategory(category) {
     this.currentCategory = category
+    this.renderContent()
+  }
+
+  applySearchFilters(searchCriteria) {
+    console.log("Applying search filters:", searchCriteria)
+
+    // Store the search criteria
+    this.searchCriteria = searchCriteria
+
+    // Re-render with filters applied
     this.renderContent()
   }
 }
