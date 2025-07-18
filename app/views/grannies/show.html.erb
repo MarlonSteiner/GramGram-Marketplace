@@ -1,94 +1,271 @@
-<!--Granny Section-->
-<div class="container m-9">
-  <div class="row">
-    <div class="col">
-      <%= image_tag "icons/arrow_icon.svg" %>
-    </div>
-    <div class="col">
-      <%= cl_image_tag @granny.image.key %>
-    </div>
-    <div class="col">
-      <div><h2 class="text-uppercase fw-bold text-dark mb-0" style="letter-spacing": 2px;><%= @granny.name %></h2></div>
+<div class="container-fluid d-flex justify-content-center py-5">
+  <div style="max-width: 900px; width: 100%;">
+
+      <!-- Back Arrow -->
+      <div class="me-4 mt-3 my-3">
+        <%= link_to root_path, class: "text-dark" do %>
+          <%= image_tag "icons/arrow_icon.svg", style: "width: 40px; height: 40px;" %>
+        <% end %>
       </div>
-        <h4 class="fw-bold">Stats</h4>
-        <p class="fw-semibold">Health -</p><p><%= @granny.stats_health %></p>
-        <p class="fw-semibold">Speed -</p><p><%= @granny.stats_speed %></p>
-        <p class="fw-semibold">Wisdom -</p><p><%= @granny.stats_wisdom %></p>
-        <p class="fw-semibold">Teeth -</p><p><%= @granny.stats_speed %></p>
-        <div class="text-center mt-auto">
-          <h3 class="text-success fw-bold mb-0">$<%= @granny.price %> / day</h3>
+    <!-- Top Section: Arrow + Image + Stats -->
+    <div class="d-flex align-items-start justify-content-center mb-4 position-relative">
+
+
+      <!-- Image + Stats Container -->
+      <div class="d-flex shadow rounded-4 gap-4 overflow-hidden" style="width: 800px;">
+
+        <!-- Granny Image -->
+        <div class="position-relative" style="width: 400px; height: 400px;">
+          <%= cl_image_tag @granny.image.key, alt: @granny.name,
+              class: "w-100 h-100",
+              style: "object-fit: cover;" %>
+
+          <!-- Star Badge -->
+          <div class="position-absolute top-0 start-0 m-3">
+            <span class="badge d-flex align-items-center px-3 py-2 rounded-pill"
+                  style="background-color: #ffd700; color: #000;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="me-1">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <%= @granny.rating || 4 %>
+            </span>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="p-4 d-flex flex-column justify-content-between"
+             style="width: 400px; background-color: #f8f9fa;">
+
+          <!-- Granny Name -->
+          <div class="text-center mb-3">
+            <div class="py-3 px-4 rounded-pill text-white" style="background-color: #6c757d;">
+              <h4 class="text-uppercase fw-bold mb-0" style="letter-spacing: 2px; font-size: 1.2rem;">
+                <%= @granny.name %>
+              </h4>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="flex-grow-1">
+            <h5 class="fw-bold text-center mb-4" style="font-size: 1.5rem;">Stats</h5>
+            <div class="text-center">
+              <div class="row mb-2">
+                <div class="col-6 text-start fw-semibold">Health</div>
+                <div class="col-6 text-end">- <%= @granny.stats_health %></div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-6 text-start fw-semibold">Speed</div>
+                <div class="col-6 text-end">- <%= @granny.stats_speed %></div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-6 text-start fw-semibold">Wisdom</div>
+                <div class="col-6 text-end">- <%= @granny.stats_wisdom %></div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-6 text-start fw-semibold">Teeth</div>
+                <div class="col-6 text-end">- <%= @granny.stats_teeth || "none" %></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="text-center">
+            <h3 class="fw-bold mb-0" style="color: #28a745; font-size: 2rem;">
+              $<%= @granny.price %> / day
+            </h3>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <button>Book</button>
+    </div>
+
+    <!-- Book Button -->
+    <div class="d-flex justify-content-center mb-5">
+      <div>
+        <button id="bookButton"
+                class="btn fw-bold text-white py-3 rounded-pill"
+                style="background-color: #e0a5a5; width: 800px; font-size: 1.3rem;"
+                onclick="toggleBookingSection()">
+          Book
+        </button>
       </div>
+    </div>
+
+    <!-- Bio & Location Section -->
+    <div class="container">
+      <div class="row g-4 justify-content-center mb-5">
+
+        <!-- Bio -->
+        <div class="col-lg-6">
+          <h4 class="fw-bold text-center mb-4" style="font-size: 2rem;">Bio</h4>
+          <div class="p-4 rounded-4" style="background-color: #d0d0d0; min-height: 200px;">
+            <p class="mb-0" style="font-size: 1.1rem;">
+              <%= @granny.bio.presence || "Uhmmmmm." %>
+            </p>
+          </div>
+        </div>
+
+        <!-- Location & Map -->
+        <div class="col-lg-6">
+          <div class="d-flex align-items-center justify-content-center mb-3">
+            <%= image_tag "icons/marker_icon.svg", style: "width: 24px; height: 24px;" %>
+            <strong class="ms-2" style="font-size: 1.2rem;"><%= @granny.location %></strong>
+          </div>
+          <div class="rounded-4 overflow-hidden"
+              style="height: 400px; width: 400px; margin: 0 auto;"
+              data-controller="map"
+              data-map-markers-value="<%= @markers.to_json %>"
+              data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold mb-4" style="font-size: 2.5rem;">Reviews</h2>
+      <div class="mb-4">
+        <span class="fw-bold" style="font-size: 1.2rem;">
+          ★ <%= (@granny.reviews.average(:rating) || 0).round(2) %> • <%= @granny.reviews.count %> reviews
+        </span>
+      </div>
+    </div>
+
+    <!-- Add Review Form -->
+    <div class="card p-4 mb-5 rounded-4" style="background-color: #f8f9fa;">
+      <h4 class="mb-3">Leave a Review</h4>
+      <%= simple_form_for([@granny, @review]) do |f| %>
+        <div class="row g-3">
+          <div class="col-md-8">
+            <%= f.input :comment, label: "Your Review", input_html: { rows: 3, class: "form-control" } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :rating, label: "Rating (1-5)", input_html: { min: 1, max: 5, type: "number", class: "form-control" } %>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <%= f.button :submit, "Submit Review", class: "btn btn-primary px-4 py-2 rounded-pill" %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Reviews Grid -->
+    <div class="row g-4">
+      <% @granny.reviews.each_with_index do |review, index| %>
+        <div class="col-md-4">
+          <div class="card p-4 h-100 rounded-4" style="border: 1px solid #e0e0e0;">
+            <!-- User Info -->
+            <div class="d-flex align-items-center mb-3">
+              <% avatar_colors = ['#8A2BE2', '#FF69B4', '#4169E1', '#32CD32', '#FF6347', '#FFD700'] %>
+              <% color = avatar_colors[index % avatar_colors.length] %>
+              <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                   style="width: 50px; height: 50px; background-color: <%= color %>; color: white; font-weight: bold;">
+                <%= review.user.first_name&.first&.upcase || 'U' %>
+              </div>
+              <div>
+                <div class="fw-bold"><%= review.user.full_name %></div>
+                <small class="text-muted">Location</small>
+              </div>
+            </div>
+
+            <!-- Rating and Date -->
+            <div class="d-flex align-items-center mb-3">
+              <div class="me-3">
+                <% review.rating.times do %>★<% end %>
+                <% (5 - review.rating).times do %>☆<% end %>
+              </div>
+              <small class="text-muted"><%= review.created_at.strftime("%B %Y") %></small>
+            </div>
+
+            <!-- Review Text -->
+            <p class="mb-0" style="line-height: 1.5;"><%= review.comment %></p>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
 
-<!--Granny Section-->
+<!-- Booking Modal -->
+<div id="bookingSection" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <div class="card p-4 rounded-4" style="background-color: #f8f9fa; max-width: 500px; width: 90%; position: relative;">
 
+      <!-- Close Button -->
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3"
+              onclick="toggleBookingSection()" aria-label="Close"></button>
 
-<!--Stuff-->
+      <h3 class="text-center mb-4">Book This Granny</h3>
+
+      <% if @reservation.errors.any? %>
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            <% @reservation.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= simple_form_for([@granny, @reservation]) do |f| %>
+        <div class="mb-3">
+          <%= f.input :start_date, input_html: { min: Date.today, class: "form-control" } %>
+        </div>
+        <div class="mb-3">
+          <%= f.input :end_date, input_html: { min: Date.today + 1, class: "form-control" } %>
+        </div>
+        <div class="text-center mt-4">
+          <%= f.button :submit, "Book", class: "btn btn-success px-5 py-2 rounded-pill" %>
+          <button type="button" class="btn btn-secondary px-5 py-2 ms-3 rounded-pill"
+                  onclick="toggleBookingSection()">Cancel</button>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
-<%# Granny Details %>
-<h1><%= @granny.name %></h1>
-<p><%= @granny.bio %></p>
-<p>Location: <%= @granny.location %></p>
-<p>Price: R<%= @granny.price %>/day</p>
-<p>Available: <%= @granny.available ? 'Yes' : 'No' %></p>
-<p>Average Rating: <%= @granny.average_rating %></p>
 
-<hr>
+<!-- Styles -->
+<style>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-<h3>Book This Granny</h3>
+.modal-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
 
-<% if @reservation.errors.any? %>
-  <div class="alert alert-danger">
-    <ul>
-      <% @reservation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<!-- JavaScript -->
+<script>
+function toggleBookingSection() {
+  const bookingSection = document.getElementById('bookingSection');
+  const bookButton = document.getElementById('bookButton');
 
-<%= simple_form_for([@granny, @reservation]) do |f| %>
-  <%= f.input :start_date, input_html: { min: Date.today } %>
-  <%= f.input :end_date, input_html: { min: Date.today + 1 } %>
-  <%= f.button :submit, "Book" %>
-<% end %>
+  if (bookingSection.style.display === 'none' || bookingSection.style.display === '') {
+    bookingSection.style.display = 'flex';
+    bookButton.textContent = 'Hide Booking';
+    document.body.style.overflow = 'hidden';
+  } else {
+    bookingSection.style.display = 'none';
+    bookButton.textContent = 'Book';
+    document.body.style.overflow = 'auto';
+  }
+}
 
-<hr>
-
-<h3>Leave a Review</h3>
-<%= simple_form_for([@granny, @review]) do |f| %>
-  <%= f.input :comment %>
-  <%= f.input :rating %>
-  <%= f.button :submit, "Submit Review" %>
-<% end %>
-
-<h3>Reviews:</h3>
-<% @granny.reviews.each do |review| %>
-  <div>
-    <p><strong><%= review.user.full_name %></strong>: <%= review.comment %> — <%= review.rating %>⭐</p>
-  </div>
-<% end %>
-
-<% if @reservation.errors.any? %>
-  <div class="alert alert-danger">
-    <ul>
-      <% @reservation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<!--This is a map that we need to need to position in the rigth-->
-<div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-</div>
+document.getElementById('bookingSection').addEventListener('click', function (e) {
+  if (e.target === this) {
+    toggleBookingSection();
+  }
+});
+</script>

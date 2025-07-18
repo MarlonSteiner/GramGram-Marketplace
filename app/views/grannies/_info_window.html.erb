@@ -1,7 +1,10 @@
-<h2><%= granny.name %></h2>
-<div>
-  <%= cl_image_tag @granny.image.key,
-    class: "card-img-top",
-    alt: "#{granny.name} picture"%>
+<div style="width: 100%; max-width: 300px;">
+  <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;"><%= granny.name %></h2>
+  <div style="width: 100%; height: 200px; overflow: hidden;">
+    <%= cl_image_tag @granny.image.key,
+      class: "w-100 h-100",
+      alt: "#{granny.name} picture",
+      style: "object-fit: cover;" %>
+  </div>
+  <p style="margin-top: 0.5rem;"><%= granny.location %></p>
 </div>
-<p><%= granny.location %></p>
