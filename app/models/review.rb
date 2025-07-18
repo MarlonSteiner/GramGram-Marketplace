@@ -18,5 +18,5 @@ class Review < ApplicationRecord
   def decrement_granny_review_count
     granny.decrement!(:review_count)
   end
-  
+
 end

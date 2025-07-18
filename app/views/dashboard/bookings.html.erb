@@ -1,10 +1,20 @@
-<h2>My Bookings</h2>
+<!-- app/views/dashboard/bookings.html.erb -->
 
-<% @reservations.each do |res| %>
-  <div class="card p-2 mb-2">
-    <strong>Granny:</strong> <%= res.granny.name %><br>
-    <strong>From:</strong> <%= res.start_date %> — <strong>To:</strong> <%= res.end_date %><br>
-    <strong>Status:</strong> <%= res.status.capitalize %><br>
-    <strong>Total:</strong> R<%= res.total_price %>
-  </div>
-<% end %>
+<div id="reservation-dashboard-root"></div>
+
+<script>
+  // Set up Mapbox token
+  window.mapboxAccessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
+
+  // Set up data for JavaScript
+  window.reservationData = <%= @reservations_json.to_json.html_safe %>;
+  window.currentUser = {
+    name: "<%= [current_user&.first_name, current_user&.last_name].compact.join(' ').presence || current_user&.email || 'Guest' %>"
+  };
+
+  console.log('Dashboard data loaded:', {
+    reservations: window.reservationData.length,
+    user: window.currentUser.name,
+    mapboxToken: !!window.mapboxAccessToken
+  });
+</script>

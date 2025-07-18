@@ -1,10 +1,25 @@
-<h1>All Grannies</h1>
+<div id="reservation-dashboard-root"></div>
 
-<% @grannies.each do |granny| %>
-  <div>
-    <h2><%= link_to granny.name, granny_path(granny) %></h2>
-    <p><%= granny.location %> — R<%= granny.price %>/day</p>
-    <p><%= granny.bio %></p>
-  </div>
+<script>
+  // Set up Mapbox token using your existing env variable
+  window.mapboxAccessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
 
-<% end %>
+  // Real reservation data from controller
+  const reservations = <%= @reservations_json.to_json.html_safe %>;
+
+  const currentUser = {
+    name: "<%= current_user&.name || 'Guest' %>"
+  };
+
+  // Render the React component
+  document.addEventListener('DOMContentLoaded', function() {
+    const dashboardRoot = document.getElementById('reservation-dashboard-root');
+    if (dashboardRoot && window.React && window.ReactDOM && window.ReservationDashboard) {
+      const element = React.createElement(window.ReservationDashboard, {
+        reservations: reservations,
+        user: currentUser
+      });
+      ReactDOM.render(element, dashboardRoot);
+    }
+  });
+</script>
