@@ -1,25 +1,220 @@
 // Specific CSS for your home-page
-.hero {
-  text-align: center;
+// Search Hero Section
+.search-hero {
+  background: linear-gradient(135deg, #a288e3 0%, #f2b5d4 100%);
   padding: 4rem 1rem;
-  background: linear-gradient(180deg, #f5f5f5 0%, #fff 100%);
+  text-align: center;
+}
+
+.search-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.search-title {
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.search-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 3rem;
+}
+
+// Search Bar
+.search-bar {
+  background: white;
+  border-radius: 50px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-field {
+  flex: 1;
+  padding: 12px 20px;
+  border-right: 1px solid #ebebeb;
+  min-width: 0;
+
+  &:last-of-type {
+    border-right: none;
+    flex: 0 0 auto;
+  }
+}
+
+.search-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #222;
+  background: transparent;
+
+  &::placeholder {
+    color: #717171;
+  }
+}
+
+.search-button {
+  background: #a288e3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #8e73d1;
+  }
+}
+
+// Search Hero Section
+.search-hero {
+  background: linear-gradient(135deg, #a288e3 0%, #f2b5d4 100%);
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.search-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.search-title {
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.search-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 3rem;
+}
+
+// Search Bar
+.search-bar {
+  background: white;
+  border-radius: 50px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-field {
+  flex: 1;
+  padding: 12px 20px;
+  border-right: 1px solid #ebebeb;
+  min-width: 0;
+
+  &:last-of-type {
+    border-right: none;
+    flex: 0 0 auto;
+  }
+}
+
+.search-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #222;
+  background: transparent;
+
+  &::placeholder {
+    color: #717171;
+  }
+}
+
+.search-button {
+  background: #a288e3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #8e73d1;
+  }
+}
+
+// Responsive search bar
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  .search-field {
+    border-right: none;
+    border-bottom: 1px solid #ebebeb;
+    padding: 12px 0;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  .search-button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
+  }
 }
 
 .title {
   font-size: 3rem;
-  color: $primary;
+  color: #a288e3;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
 .tag {
   font-size: 1.2rem;
-  color: $text;
+  color: #3e3e3e;
   margin-bottom: 2rem;
 }
 
 .card {
-  background: $surface;
+  background: #e2e8dd;
   border-radius: 12px;
   padding: 2rem;
   display: inline-block;
@@ -33,7 +228,7 @@
 }
 
 .btn {
-  background-color: $primary;
+  background-color: #a288e3;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -43,15 +238,11 @@
   transition: background 0.2s ease;
 
   &:hover {
-    background-color: darken($primary, 10%);
+    background-color: #8e73d1;
   }
 }
 
-// Add this to your app/assets/stylesheets/_home.scss file
-
-// Keep all your existing styles and add these below:
-
-// Granny Marketplace Section
+// Marketplace Section
 .granny-marketplace {
   padding: 4rem 0;
   background: white;
@@ -63,7 +254,6 @@
   padding: 0 1rem;
 }
 
-// Section Header
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -71,14 +261,14 @@
 
 .section-title {
   font-size: 2.5rem;
-  color: $primary;
+  color: #a288e3;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
 .section-subtitle {
   font-size: 1.1rem;
-  color: $text;
+  color: #3e3e3e;
   margin-bottom: 0;
 }
 
@@ -87,13 +277,12 @@
   display: flex;
   gap: 2rem;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   overflow-x: auto;
   padding: 1rem 0;
-
-  // Hide scrollbar
   scrollbar-width: none;
   -ms-overflow-style: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -106,15 +295,16 @@
   min-width: 80px;
   padding: 1rem 0.5rem;
   text-decoration: none;
-  color: lighten($text, 20%);
+  color: #999;
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
   white-space: nowrap;
+  cursor: pointer;
 
   &:hover,
   &.active {
-    color: $primary;
-    border-bottom-color: $primary;
+    color: #a288e3;
+    border-bottom-color: #a288e3;
     text-decoration: none;
   }
 }
@@ -122,53 +312,12 @@
 .category-icon {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  filter: grayscale(1);
-  transition: filter 0.3s ease;
-
-  .category-item:hover &,
-  .category-item.active & {
-    filter: grayscale(0);
-  }
 }
 
 .category-label {
   font-size: 0.9rem;
   font-weight: 600;
   text-align: center;
-}
-
-// Filter Buttons
-.filters-container {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-}
-
-.filter-button {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid lighten($primary, 40%);
-  background: white;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  color: $primary;
-
-  &:hover {
-    border-color: $primary;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  &.active {
-    background: $primary;
-    color: white;
-    border-color: $primary;
-  }
 }
 
 // Carousel Sections
@@ -186,7 +335,7 @@
 .carousel-title {
   font-size: 1.8rem;
   font-weight: bold;
-  color: $primary;
+  color: #a288e3;
   margin: 0;
 }
 
@@ -198,7 +347,7 @@
 .nav-button {
   width: 40px;
   height: 40px;
-  border: 2px solid lighten($primary, 40%);
+  border: 2px solid #d1c4e9;
   background: white;
   border-radius: 50%;
   display: flex;
@@ -206,19 +355,14 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: $primary;
+  color: #a288e3;
+  font-size: 1.2rem;
 
   &:hover {
-    border-color: $primary;
-    background: $primary;
+    border-color: #a288e3;
+    background: #a288e3;
     color: white;
     transform: scale(1.1);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
   }
 }
 
@@ -237,38 +381,43 @@
   }
 }
 
-// Granny Cards
+// Airbnb-Style Granny Cards
 .granny-card {
-  min-width: 280px;
-  background: $surface;
+  min-width: 300px;
+  background: white;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
 }
 
 .card-image-container {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 250px;
   overflow: hidden;
+  background: linear-gradient(45deg, #f2b5d4, #a288e3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+}
 
-  .granny-card:hover & {
-    transform: scale(1.05);
-  }
+.card-placeholder {
+  font-size: 3rem;
+  color: white;
+  opacity: 0.8;
 }
 
 .heart-button {
@@ -285,6 +434,7 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 1.2rem;
 
   &:hover {
     background: white;
@@ -292,23 +442,19 @@
   }
 }
 
-.availability-indicator {
+.availability-badge {
   position: absolute;
   top: 12px;
   left: 12px;
-  padding: 0.25rem 0.75rem;
-  background: rgba(34, 34, 34, 0.8);
+  padding: 0.3rem 0.8rem;
+  background: rgba(30, 221, 136, 0.9);
   color: white;
-  border-radius: 6px;
+  border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
 
-  &.available {
-    background: rgba(40, 167, 69, 0.9);
-  }
-
   &.unavailable {
-    background: rgba(220, 53, 69, 0.9);
+    background: rgba(253, 16, 21, 0.9);
   }
 }
 
@@ -326,10 +472,20 @@
 
 .granny-name {
   font-size: 1.1rem;
-  font-weight: bold;
-  color: $primary;
+  font-weight: 600;
+  color: #3e3e3e;
   line-height: 1.3;
   margin: 0;
+}
+
+.superhost-badge {
+  background: #a288e3;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
 }
 
 .rating {
@@ -345,18 +501,18 @@
 
 .rating-number {
   font-size: 0.9rem;
-  color: $text;
+  color: #3e3e3e;
   font-weight: 600;
 }
 
 .location {
-  color: lighten($text, 20%);
+  color: #666;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
 
 .granny-bio {
-  color: $text;
+  color: #3e3e3e;
   font-size: 0.9rem;
   line-height: 1.4;
   margin-bottom: 1rem;
@@ -372,8 +528,8 @@
   gap: 0.75rem;
   margin-bottom: 1rem;
   padding: 0.75rem 0;
-  border-top: 1px solid lighten($text, 50%);
-  border-bottom: 1px solid lighten($text, 50%);
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 .stat {
@@ -384,14 +540,14 @@
 }
 
 .stat-value {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
-  color: $primary;
+  color: #a288e3;
 }
 
 .stat-label {
   font-size: 0.7rem;
-  color: lighten($text, 20%);
+  color: #666;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 0.25rem;
@@ -402,182 +558,12 @@
 }
 
 .price {
-  color: $primary;
+  color: #3e3e3e;
   font-size: 1.1rem;
   font-weight: bold;
 
   .price-period {
     font-weight: normal;
-    color: $text;
-  }
-}
-
-// Superhost Badge
-.superhost-badge {
-  background: $primary;
-  color: white;
-  padding: 0.125rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  margin-left: 0.5rem;
-}
-
-// No Results State
-.no-results {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: lighten($text, 20%);
-
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: $primary;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-}
-
-// Responsive Design
-@media (max-width: 768px) {
-  .granny-marketplace {
-    padding: 2rem 0;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .category-nav {
-    gap: 1rem;
-    padding: 0.5rem 0;
-  }
-
-  .filters-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .carousel-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .granny-card {
-    min-width: 260px;
-  }
-}
-
-// Granny Marketplace Section
-.granny-marketplace {
-  padding: 4rem 0;
-  background: white;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-// Section Header
-.section-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  color: $primary;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: $text;
-  margin-bottom: 0;
-}
-
-// Category Navigation
-.category-nav {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-  overflow-x: auto;
-  padding: 1rem 0;
-}
-
-.category-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
-  padding: 1rem 0.5rem;
-  text-decoration: none;
-  color: lighten($text, 20%);
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-
-  &:hover,
-  &.active {
-    color: $primary;
-    border-bottom-color: $primary;
-    text-decoration: none;
-  }
-}
-
-.category-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.category-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-#carousel-container {
-  text-align: center;
-  padding: 2rem;
-  color: $text;
-}
-
-// Section Header
-.section-title {
-  font-size: 2.5rem;
-  color: #3e3e3e;  // your $primary color
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: #3e3e3e;  // your $text color
-  margin-bottom: 0;
-}
-
-// Category Navigation
-.category-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
-  padding: 1rem 0.5rem;
-  text-decoration: none;
-  color: #666;  // lighter version of your text color
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-
-  &:hover,
-  &.active {
-    color: #a288e3;;  // your $primary color
-    border-bottom-color: #a288e3;  // your $primary color
-    text-decoration: none;
+    color: #666;
   }
 }
