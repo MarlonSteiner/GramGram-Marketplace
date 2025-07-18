@@ -356,7 +356,7 @@ grannies_data = [
 
 puts "Creating 48 grannies..."
 
-# Create grannies using actual user IDs and attach photos
+# Create grannies using actual user IDs and attach images
 grannies_data.each_with_index do |granny_attrs, index|
   granny = Granny.create!(granny_attrs)
 
