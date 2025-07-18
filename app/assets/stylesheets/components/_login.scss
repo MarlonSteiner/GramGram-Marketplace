@@ -1,0 +1,214 @@
+/* app/assets/stylesheets/components/_login.scss */
+
+/* Login Page Wrapper - Centered but allows navbar */
+.login-page-wrapper {
+  background: linear-gradient(45deg, #f2b5d4, #a288e3); /* Exact gradient from home page */
+  min-height: calc(100vh - 80px); /* Adjust based on your navbar height */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Alternative approach - center the container directly */
+.login-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 400px;
+  width: 100%;
+  animation: slideUp 0.6s ease-out;
+  margin: 0 auto; /* This ensures horizontal centering */
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Back to original purple/lavender */
+  color: white;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.login-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.login-header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.login-form {
+  padding: 40px 30px;
+}
+
+/* Override Simple Form styles */
+.gramgram-login-form .form-inputs {
+  margin-bottom: 0;
+}
+
+.gramgram-login-form .form-group {
+  margin-bottom: 25px;
+}
+
+.gramgram-login-form .input-wrapper {
+  margin-bottom: 0;
+}
+
+.gramgram-login-form .form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.gramgram-login-form .form-control {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  box-shadow: none;
+}
+
+.gramgram-login-form .form-control:focus {
+  outline: none;
+  border-color: #667eea; /* Back to original purple */
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* Back to original focus shadow */
+}
+
+.gramgram-login-form .form-control::placeholder {
+  color: #999;
+}
+
+/* Remember me checkbox styling */
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.remember-wrapper {
+  margin-bottom: 0 !important;
+}
+
+.remember-checkbox {
+  margin-right: 10px;
+  width: auto !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.remember-label {
+  margin-bottom: 0 !important;
+  font-size: 0.9rem !important;
+  color: #666 !important;
+}
+
+/* Login button */
+.login-button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Back to original purple/lavender */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); /* Back to original shadow */
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+/* Devise links styling */
+.devise-links {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.devise-links a {
+  color: #667eea; /* Back to original purple */
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.devise-links a:hover {
+  color: #764ba2; /* Back to original hover color */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .login-container {
+    margin: 10px;
+    border-radius: 15px;
+  }
+
+  .login-header {
+    padding: 30px 20px;
+  }
+
+  .login-header h1 {
+    font-size: 2rem;
+  }
+
+  .login-form {
+    padding: 30px 20px;
+  }
+}
+
+/* Hide Simple Form error styling conflicts */
+.gramgram-login-form .field_with_errors {
+  display: inline;
+}
+
+.gramgram-login-form .invalid-feedback {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+/* Form validation states */
+.gramgram-login-form .form-control.is-invalid {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.gramgram-login-form .form-control.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}

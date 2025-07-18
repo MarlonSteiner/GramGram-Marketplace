@@ -1,12 +1,7 @@
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+
 User.destroy_all
 Granny.destroy_all
 
@@ -356,34 +351,56 @@ grannies_data = [
 
 puts "Creating 48 grannies..."
 
-# Create grannies using actual user IDs and attach images
+# Create grannies and upload images to Cloudinary
 grannies_data.each_with_index do |granny_attrs, index|
-  granny = Granny.create!(granny_attrs)
-
-  # Attach photo to the granny
+  # Upload image to Cloudinary FIRST
   file_path = Rails.root.join('app', 'assets', 'images', 'grannies', "Granny-#{index + 1}.svg")
+  image_key = nil
 
   if File.exist?(file_path)
-    # Open the file and attach it - this will trigger Cloudinary upload
-    File.open(file_path) do |file|
-      granny.image.attach(
-        io: file,
-        filename: "Granny-#{index + 1}.svg",
-        content_type: 'image/svg+xml'
+    begin
+      puts "Uploading #{granny_attrs[:name]} to Cloudinary..."
+
+      # Upload to Cloudinary
+      upload_result = Cloudinary::Uploader.upload(
+        file_path.to_s,
+        folder: "development",
+        resource_type: "auto",
+        public_id: "granny_#{index + 1}"
       )
+
+      image_key = upload_result['public_id']
+      puts "✅ Successfully uploaded to Cloudinary: #{image_key}"
+
+    rescue => e
+      puts "❌ Failed to upload #{granny_attrs[:name]}: #{e.message}"
     end
-
-    # Wait a moment for the upload to complete
-    sleep(0.5)
-
-    puts "✅ Attached and uploaded photo to #{granny.name}"
   else
-    puts "❌ Photo not found for #{granny.name}: #{file_path}"
+    puts "❌ Photo not found for #{granny_attrs[:name]}: #{file_path}"
   end
+
+  # Now create the granny WITH the image_key
+  if image_key
+    granny = Granny.create!(granny_attrs.merge(image_key: image_key))
+    puts "✅ Created #{granny.name} with image"
+    puts "   Image URL: #{granny.image_url}"
+  else
+    # If no image was uploaded successfully, skip this granny or handle differently
+    puts "⚠️  Skipping #{granny_attrs[:name]} - no image could be uploaded"
+    # Uncomment the next line if you want to create grannies without images
+    # granny = Granny.create!(granny_attrs.except(:image_key))
+  end
+
+  # Small delay to avoid overwhelming Cloudinary
+  sleep(0.2)
 end
 
-puts "\n✅ Created 48 grannies with 6 category owners!"
+puts "\n✅ Finished creating grannies with Cloudinary images!"
 puts "\nSummary:"
 Granny.group(:category).count.each do |category, count|
   puts "#{category}: #{count} grannies"
 end
+
+puts "\nImage status:"
+grannies_with_images = Granny.where.not(image_key: nil).count
+puts "Grannies with images: #{grannies_with_images}/#{Granny.count}"

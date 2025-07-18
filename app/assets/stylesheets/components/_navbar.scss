@@ -1,12 +1,153 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
+  padding: 0.8rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #e9ecef;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
+.navbar-lewagon .navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #FF5A5F;
+
+  &:hover {
+    color: #FF5A5F;
+    text-decoration: none;
+  }
+}
+
 .navbar-lewagon .navbar-brand img {
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+  transition: transform 0.2s ease;
+  object-fit: contain;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.navbar-lewagon .navbar-brand-text {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.navbar-lewagon .navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-lewagon .nav-link {
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #FF5A5F;
+    background-color: #f8f9fa;
+  }
+}
+
+.navbar-lewagon .btn-primary {
+  background-color: #FF5A5F;
+  border-color: #FF5A5F;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #e04348;
+    border-color: #e04348;
+    transform: translateY(-1px);
+  }
+}
+
+.navbar-lewagon .dropdown-toggle {
+  border: none;
+  background: none;
+
+  &::after {
+    display: none;
+  }
+}
+
+.navbar-lewagon .avatar {
   width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #FF5A5F;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #e04348;
+    transform: scale(1.05);
+  }
+}
+
+.navbar-lewagon .dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+}
+
+.navbar-lewagon .dropdown-item {
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+
+  &:hover {
+    background-color: #f8f9fa;
+    color: #FF5A5F;
+  }
+}
+
+.navbar-lewagon .dropdown-divider {
+  margin: 0.5rem 0;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .navbar-lewagon {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-lewagon .navbar-brand {
+    font-size: 1.3rem;
+  }
+
+  .navbar-lewagon .navbar-brand img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .navbar-lewagon .navbar-nav {
+    gap: 0.5rem;
+  }
+
+  .navbar-lewagon .btn-primary {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .navbar-lewagon .navbar-collapse {
+    margin-top: 1rem;
+  }
 }

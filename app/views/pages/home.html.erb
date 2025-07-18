@@ -120,9 +120,19 @@
             rating: g.rating,
             review_count: g.review_count,
             age: g.age,
-            image_url: g.image.attached? ? url_for(g.image) : nil
+            image_url: g.image_url
           }
         }.to_json %>">
+
+        <script>
+          console.log('First granny data:', <%= @grannies.first(3).map { |g|
+            {
+              name: g.name,
+              image_key: g.image_key,
+              image_url: g.image_url
+            }
+          }.to_json.html_safe %>);
+        </script>
       <!-- Cards will appear here -->
     </div>
   </div>
