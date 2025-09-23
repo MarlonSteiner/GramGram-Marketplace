@@ -1,7 +1,7 @@
 # GramGram
 
 A Ruby on Rails marketplace where you can “rent a grandma 👵🏻”  
-Pixar-style grandmas with quirky stats—teeth, speed, and age—make for a hilarious, collectible experience.
+Pixar-style grandmas with quirky stats like teeth, speed, health and age. Makes for a hilarious, collectible experience.
 Japan inspired concept 🎌
 
 <p align="center">
