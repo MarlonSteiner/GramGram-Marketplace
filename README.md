@@ -4,17 +4,20 @@ A Ruby on Rails marketplace where you can “rent a grandma 👵🏻”
 Pixar-style grandmas with quirky stats—teeth, speed, and age—make for a hilarious, collectible experience.
 Japan inspired concept 🎌
 
-
-
 <p align="center">
-  <a href="#demo">Demo</a> •
+  <a href="#preview">Preview</a> •
+  <a href="#value-proposition">Value Proposition</a> •
+  <a href="#the-idea">The Idea</a> •
   <a href="#features">Features</a> •
   <a href="#quick-start">Quick Start</a> •
   <a href="#how-it-works">How It Works</a> •
+  <a href="#tech-stack">Tech Stack</a> •
   <a href="#roadmap">Roadmap</a> •
-  <a href="#team">Team</a>
+  <a href="#contributing">Contributing</a> •
+  <a href="#team">Team</a> •
+  <a href="#license">License</a> •
+  <a href="#repo-about-and-topics">Repo About & Topics</a>
 </p>
-
 
 ## Preview
 <img width="1198" height="636" alt="Screenshot 2025-09-23 at 19 33 17" src="https://github.com/user-attachments/assets/a59e4f94-7ece-4279-a5e9-423d5d044e08" />
