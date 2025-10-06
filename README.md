@@ -20,7 +20,10 @@ Japan inspired concept 🎌
 </p>
 
 ## Preview
-<img width="1198" height="636" alt="Screenshot 2025-09-23 at 19 33 17" src="https://github.com/user-attachments/assets/a59e4f94-7ece-4279-a5e9-423d5d044e08" />
+[gramgram_thumbnail.pdf](https://github.com/user-attachments/files/22730592/gramgram_thumbnail.pdf)
+
+
+
 
 
 ## Value Proposition
