@@ -20,11 +20,7 @@ Japan inspired concept 🎌
 </p>
 
 ## Preview
-[gramgram_thumbnail.pdf](https://github.com/user-attachments/files/22730592/gramgram_thumbnail.pdf)
-
-
-
-
+![App preview](docs/gramgram_banner.jpg)
 
 ## Value Proposition
 Many people never get to experience life with a grandparent—maybe their grandparents passed away early or live far away.  
